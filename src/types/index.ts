@@ -1,4 +1,4 @@
-import { Customer } from "@prisma/client";
+
 
 export  interface User {
     id: string;
@@ -15,6 +15,7 @@ export interface Customer {
     name: string;
     email: string;
     imageUrl: string;
+}
 
 
 export type CreateCustomerData = Omit<Customer, 'id'>;
