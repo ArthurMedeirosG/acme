@@ -39,12 +39,12 @@ export interface Revenue {
     revenue: number;
 };
 
-export interface ApiResponse<GENERIC> {
-    data: GENERIC;
+export interface ApiResponse<T> {
+    data: T;
     message?: string;
 } 
 
 export interface ApiError {
     error: string;
-    details?: unknown;
+    details?: Record<string, string[]>;
 }
