@@ -51,6 +51,10 @@ export interface FindAllInvoiceParams {
   page?: number;
   limit?: number;
   order?: SortOrder;
+  status?: string;
+  customerId?: number;
+  dateFrom?: string;
+  dateTo?: string;
 };
 
 export interface Revenue {
