@@ -52,10 +52,18 @@ export interface FindAllInvoiceParams {
   limit?: number;
   order?: SortOrder;
   status?: string;
-  customerId?: number;
+  customerId?: string;
   dateFrom?: string;
   dateTo?: string;
 };
+
+export interface InvoiceStats {
+  totalPendente: number;
+  totalPago: number;
+  countPendente: number;
+  countPago: number;
+  countTotal: number;
+}
 
 export interface Revenue {
   month: string;

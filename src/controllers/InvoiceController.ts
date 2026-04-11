@@ -4,9 +4,10 @@ import {
   findInvoiceById,
   createInvoice,
   updateInvoice,
-  deleteInvoice
+  deleteInvoice,
+  getInvoiceStats
 } from '@/services/InvoiceService';
-import { ApiError, SortOrder } from '@/types';
+import { ApiError, InvoiceStatus, SortOrder, InvoiceStats } from '@/types';
 
 export const CreateInvoiceSchema = z.object({
   customerId: z
@@ -43,15 +44,29 @@ export const InvoiceController = {
     const page = Number(searchParams.get('page')) || 1;
     const limit = Number(searchParams.get('limit')) || 10;
     const order = (searchParams.get('order') as SortOrder) ?? 'desc';
+    const status = searchParams.get('status') as InvoiceStatus | null ?? undefined;
+    const customerId = searchParams.get('customerId') ?? undefined;
+    const dateFrom = searchParams.get('dateFrom') ?? undefined;
+    const dateTo = searchParams.get('dateTo') ?? undefined;
 
     const invoices = await findAllInvoices({
       search,
       page,
       limit,
-      order
+      order,
+      status,
+       customerId,
+        dateFrom,
+        dateTo
     });
 
     return { status: 200, body: invoices };
+  },
+
+  async stats () {
+    const data: InvoiceStats = await getInvoiceStats();
+
+    return {status: 200, body: data};
   },
 
   async getById(id: string) {
